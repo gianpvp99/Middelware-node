@@ -26,7 +26,7 @@ async function authenticate() {
         return cachedToken;
     }
     try {
-        const response = await axios.post('https://mafapicrmtest.azurewebsites.net/api/login/authenticate', API_CREDENTIALS);
+        const response = await axios.post('https://mafperu.com.pe/wa_experiencia_crm/api/login/authenticate', API_CREDENTIALS);
         cachedToken = `Bearer ${response.data}`;
         tokenExpiration = new Date(new Date().getTime() + 60 * 60 * 1000); // Expires in one hour
         return cachedToken;
@@ -39,7 +39,7 @@ async function authenticate() {
 app.get('/tipoDoc', async (req, res) => {
     try {
         const token = await authenticate(); // Asume que tienes una función para obtener un token de autenticación
-        const url = 'https://mafapicrmtest.azurewebsites.net/api/TipoDoc'; // Asegúrate de ajustar la URL según sea necesario
+        const url = 'https://mafperu.com.pe/wa_experiencia_crm/api/TipoDoc'; // Asegúrate de ajustar la URL según sea necesario
         const response = await axios.get(url, {
             headers: { Authorization: token }
         });
@@ -59,7 +59,7 @@ app.get('/tipoDoc', async (req, res) => {
 app.get('/cliente/:documento', async (req, res) => {
     try {
         const token = await authenticate();
-        const response = await axios.get(`https://mafapicrmtest.azurewebsites.net/api/cliente/ObtenerPorDocumento?documento=${req.params.documento}`, {
+        const response = await axios.get(`https://mafperu.com.pe/wa_experiencia_crm/api/cliente/ObtenerPorDocumento?documento=${req.params.documento}`, {
             headers: { Authorization: token }
         });
         res.send(response.data);
@@ -75,7 +75,7 @@ app.get('/cliente/:documento', async (req, res) => {
 app.get('/contrato/:documento', async (req, res) => {
     try {
         const token = await authenticate();
-        const response = await axios.get(`https://mafapicrmtest.azurewebsites.net/api/contrato/ObtenerPorDocumento?documento=${req.params.documento}`, {
+        const response = await axios.get(`https://mafperu.com.pe/wa_experiencia_crm/api/contrato/ObtenerPorDocumento?documento=${req.params.documento}`, {
             headers: { Authorization: token }
         });
         res.send(response.data);
@@ -87,7 +87,7 @@ app.get('/contrato/:documento', async (req, res) => {
 app.get('/motivo/:tipo', async (req, res) => {
     try {
         const token = await authenticate();
-        const response = await axios.get(`https://mafapicrmtest.azurewebsites.net/api/Motivo?Tipo=${req.params.tipo}`, {
+        const response = await axios.get(`https://mafperu.com.pe/wa_experiencia_crm/api/Motivo?Tipo=${req.params.tipo}`, {
             headers: { Authorization: token }
         });
         res.send(response.data);
@@ -102,7 +102,7 @@ app.get('/motivo/:tipo', async (req, res) => {
 app.get('/submotivo/:tipo/:motivo', async (req, res) => {
     try {
         const token = await authenticate();
-        const url = `https://mafapicrmtest.azurewebsites.net/api/SubMotivo?Tipo=${req.params.tipo}&Motivo=${req.params.motivo}`;
+        const url = `https://mafperu.com.pe/wa_experiencia_crm/api/SubMotivo?Tipo=${req.params.tipo}&Motivo=${req.params.motivo}`;
         const response = await axios.get(url, {
             headers: { Authorization: token }
         });
@@ -136,7 +136,7 @@ app.post('/adjunto', upload.array('file', 10), async (req, res) => {
                 Data: fileData
             };
 
-            return axios.post('https://mafapicrmtest.azurewebsites.net/api/adjunto', adjuntoData, {
+            return axios.post('https://mafperu.com.pe/wa_experiencia_crm/api/adjunto', adjuntoData, {
                 headers: {
                     Authorization: token,
                     'Content-Type': 'application/json'
@@ -160,7 +160,7 @@ app.post('/adjunto', upload.array('file', 10), async (req, res) => {
 app.post('/RegistroForm', async (req, res) => {
     try {
         const token = await authenticate();
-        const response = await axios.post('https://mafapicrmtest.azurewebsites.net/api/RegistroForm', req.body, {
+        const response = await axios.post('https://mafperu.com.pe/wa_experiencia_crm/api/RegistroForm', req.body, {
             headers: {
                 Authorization: token,
                 'Content-Type': 'application/json'
